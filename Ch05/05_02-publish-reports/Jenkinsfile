@@ -12,15 +12,15 @@ pipeline {
             steps {
                 dir("${env.WORKSPACE}/Ch05/05_02-publish-reports"){
                     bat "\"C:\\Program Files\\Git\\bin\\bash.exe\" python -m venv venv"
-                    bat './venv/bin/pip3 install --upgrade --requirement requirements.txt'
+                    bat "\"C:\\Program Files\\Git\\bin\\bash.exe\" ./venv/bin/pip3 install --upgrade --requirement requirements.txt"
                 }
             }
         }
         stage('Lint') {
             steps {
                 dir("${env.WORKSPACE}/Ch05/05_02-publish-reports"){
-                    bat 'venv/bin/flake8 --ignore=E501,E231 *.py'
-                    bat 'venv/bin/pylint --errors-only --disable=C0301 --disable=C0326 *.py'
+                    bat "\"C:\\Program Files\\Git\\bin\\bash.exe\" venv/bin/flake8 --ignore=E501,E231 *.py"
+                    bat "\"C:\\Program Files\\Git\\bin\\bash.exe\" venv/bin/pylint --errors-only --disable=C0301 --disable=C0326 *.py"
                 }
             }
         }
