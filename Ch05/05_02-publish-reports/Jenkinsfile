@@ -19,8 +19,8 @@ pipeline {
         stage('Lint') {
             steps {
                 dir("${env.WORKSPACE}/Ch05/05_02-publish-reports") {
-                    bat 'venv\\Scripts\\flake8 --ignore=E501,E231 *.py'  // Use Windows path separator
-                    bat 'venv\\Scripts\\pylint --errors-only --disable=C0301 --disable=C0326 *.py'  // Use Windows path separator
+                    bat 'venv\\Scripts\\flake8 --ignore=E501,E231 .\\*.py'
+                    bat 'venv\\Scripts\\pylint --errors-only --disable=C0301 --disable=C0326 .\\*.py'
                 }
             }
         }
