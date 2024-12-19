@@ -40,7 +40,7 @@ pipeline {
                 dir("${env.WORKSPACE}/Ch05/05_02-publish-reports") {
                     bat '''
                     for %%f in (test_*.py) do (
-                    venv\\Scripts\\coverage run -m pytest -v %%f
+                    venv\\Scripts\\coverage run -m pytest --junitxml=pytest_junit.xml -v %%f
                     )
                     '''
                 }
