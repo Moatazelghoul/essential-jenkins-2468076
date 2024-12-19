@@ -11,7 +11,7 @@ pipeline {
         stage('Requirements') {
             steps {
                 dir("${env.WORKSPACE}/Ch05/05_02-publish-reports") {
-                    bat 'python -m venv venv'  // Use bat instead of sh
+                    bat 'C:\\Users\\melghoul\\AppData\\Local\\Programs\\Python\\Python313\\python.exe -m venv venv'
                     bat 'venv\\Scripts\\pip install --upgrade --requirement requirements.txt'  // Use Windows path separator
                 }
             }
