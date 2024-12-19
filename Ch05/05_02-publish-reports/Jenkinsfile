@@ -19,9 +19,9 @@ pipeline {
         stage('Lint') {
             steps {
                 dir("${env.WORKSPACE}/Ch05/05_02-publish-reports") {
-                    bat '''
+            bat '''
             for %%f in (*.py) do (
-                venv\\Scripts\\flake8 --ignore=E501,E231 %%f
+            venv\\Scripts\\flake8 --ignore=E501,E231 %%f
             )
             '''
 
@@ -29,9 +29,7 @@ pipeline {
             for %%f in (*.py) do (
             venv\\Scripts\\pylint --errors-only --disable=C0301 --disable=C0326 %%f
             )
-            '''
-
-                    
+            '''                    
                 }
             }
         }
