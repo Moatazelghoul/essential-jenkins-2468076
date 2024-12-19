@@ -39,9 +39,10 @@ pipeline {
             steps {
                 dir("${env.WORKSPACE}/Ch05/05_02-publish-reports") {
                     bat '''
-                        venv\\Scripts\\coverage run -m pytest -v test_*.py \
-                            --junitxml=pytest_junit.xml
-                    '''  // Use Windows path separator
+                    for %%f in (test_*.py) do (
+                    venv\\Scripts\\coverage run -m pytest -v %%f
+                    )
+                    '''
                 }
             }
         }
