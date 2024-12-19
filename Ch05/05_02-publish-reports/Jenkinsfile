@@ -10,27 +10,27 @@ pipeline {
     stages {
         stage('Requirements') {
             steps {
-                dir("${env.WORKSPACE}/Ch05/05_02-publish-reports"){
-                    bat "\"C:\\Program Files\\Git\\bin\\bash.exe\" python -m venv venv"
-                    bat "\"C:\\Program Files\\Git\\bin\\bash.exe\" ./venv/bin/pip3 install --upgrade --requirement requirements.txt"
+                dir("${env.WORKSPACE}/Ch05/05_02-publish-reports") {
+                    bat 'python -m venv venv'  // Use bat instead of sh
+                    bat 'venv\\Scripts\\pip install --upgrade --requirement requirements.txt'  // Use Windows path separator
                 }
             }
         }
         stage('Lint') {
             steps {
-                dir("${env.WORKSPACE}/Ch05/05_02-publish-reports"){
-                    bat "\"C:\\Program Files\\Git\\bin\\bash.exe\" venv/bin/flake8 --ignore=E501,E231 *.py"
-                    bat "\"C:\\Program Files\\Git\\bin\\bash.exe\" venv/bin/pylint --errors-only --disable=C0301 --disable=C0326 *.py"
+                dir("${env.WORKSPACE}/Ch05/05_02-publish-reports") {
+                    bat 'venv\\Scripts\\flake8 --ignore=E501,E231 *.py'  // Use Windows path separator
+                    bat 'venv\\Scripts\\pylint --errors-only --disable=C0301 --disable=C0326 *.py'  // Use Windows path separator
                 }
             }
         }
         stage('Test') {
             steps {
-                dir("${env.WORKSPACE}/Ch05/05_02-publish-reports"){
-                    bat('''
-                        venv/bin/coverage run -m pytest -v test_*.py \
+                dir("${env.WORKSPACE}/Ch05/05_02-publish-reports") {
+                    bat '''
+                        venv\\Scripts\\coverage run -m pytest -v test_*.py \
                             --junitxml=pytest_junit.xml
-                    ''')
+                    '''  // Use Windows path separator
                 }
             }
         }
@@ -48,8 +48,8 @@ pipeline {
 
     post {
         always {
-            dir("${env.WORKSPACE}/Ch05/05_02-publish-reports"){
-                bat 'venv/bin/coverage xml'
+            dir("${env.WORKSPACE}/Ch05/05_02-publish-reports") {
+                bat 'venv\\Scripts\\coverage xml'  // Use Windows path separator
             }
 
             junit allowEmptyResults: true, testResults: '**/pytest_junit.xml'
